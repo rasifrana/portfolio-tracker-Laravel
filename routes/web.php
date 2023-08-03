@@ -18,12 +18,13 @@ use App\Models\User;
 */
 
 Route::get('/', function () {
+   
     // echo "<pre>".print_r(auth()->user(),true)."</pre>"; die();
     // $investments = auth()->user()->usersInvestments()->latest()->get();
-    $investments = Investment::where('user_id', auth()->id())->get();
-    // if (auth()->check()) {
-    //     $investments = auth()->user()->usersInvestments()->latest()->get();
-    // }
+    // $investments = Investment::where('user_id', auth()->id())->get();
+    if (auth()->check()) {
+        $investments = auth()->user()->usersInvestments()->latest()->get();
+    }
     return view('home', ['investments' => $investments]);
 });
 
