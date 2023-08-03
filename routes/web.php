@@ -1,7 +1,10 @@
 <?php
 
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\InvestmentController;
+use App\Models\Investment;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +18,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    // echo "<pre>".print_r(auth()->user(),true)."</pre>"; die();
+    // $investments = auth()->user()->usersInvestments()->latest()->get();
+    $investments = Investment::where('user_id', auth()->id())->get();
+    // if (auth()->check()) {
+    //     $investments = auth()->user()->usersInvestments()->latest()->get();
+    // }
+    return view('home', ['investments' => $investments]);
 });
 
 Route::post('register', [UserController::class, 'register']);
+Route::post('login', [UserController::class, 'login']);
+Route::post('logout', [UserController::class, 'logout']);
+
+Route::post('create-investment', [InvestmentController::class, 'createInvestment']);
