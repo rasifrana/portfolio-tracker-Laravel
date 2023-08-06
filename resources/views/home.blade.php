@@ -15,7 +15,7 @@
             <button>Logout</button>
         </form>
 
-        {{-- Create a post --}}
+       
 
     <div style="border: 1px solid black; margin-top: 10px;">
         <h2>Create a New Asset</h2>
@@ -23,7 +23,7 @@
           @csrf
           <input type="text" name="title" placeholder="post title">
           <textarea name="body" placeholder="body content..."></textarea>
-          <button>Save Asset</button>
+          <button>Add Asset</button>
         </form>
       </div>
 
