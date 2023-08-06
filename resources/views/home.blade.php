@@ -18,12 +18,12 @@
         {{-- Create a post --}}
 
     <div style="border: 1px solid black; margin-top: 10px;">
-        <h2>Create a New Post</h2>
+        <h2>Create a New Asset</h2>
         <form action="/create-investment" method="POST">
           @csrf
           <input type="text" name="title" placeholder="post title">
           <textarea name="body" placeholder="body content..."></textarea>
-          <button>Save Post</button>
+          <button>Save Asset</button>
         </form>
       </div>
 
