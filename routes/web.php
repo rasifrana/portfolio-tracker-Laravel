@@ -18,12 +18,17 @@ use App\Models\User;
 */
 
 Route::get('/', function () {
-   
+    $investments = [];
     // echo "<pre>".print_r(auth()->user(),true)."</pre>"; die();
     // $investments = auth()->user()->usersInvestments()->latest()->get();
-    // $investments = Investment::where('user_id', auth()->id())->get();
+    
     if (auth()->check()) {
-        $investments = auth()->user()->usersInvestments()->latest()->get();
+        // $investments = [auth()->user()->usersInvestments()->latest()->get()];
+        $investments = Investment::where('user_id', auth()->id())->get();
+        // foreach($investments as $invest) {
+        //     echo "<pre>".print_r($invest['title'],true)."</pre>"; die();
+        // }
+        
     }
     return view('home', ['investments' => $investments]);
 });
@@ -32,4 +37,8 @@ Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']);
 Route::post('logout', [UserController::class, 'logout']);
 
+// Invstment related routes
 Route::post('create-investment', [InvestmentController::class, 'createInvestment']);
+Route::get('/edit-investment/{investment}', [InvestmentController::class, 'showEditScreen']);
+Route::put('/edit-investment/{investment}', [InvestmentController::class, 'updateInvestment']);
+Route::delete('/delete-investment/{investment}', [InvestmentController::class, 'deleteInvestment']);

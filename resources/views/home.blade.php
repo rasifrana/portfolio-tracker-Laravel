@@ -29,13 +29,13 @@
 
       {{-- Show all Investments --}}
       <div style="border: 3px solid black;">
-        <h2>All Posts</h2>
+        <h2>All Assets</h2>
         @foreach($investments as $investment)
         <div style="background-color: gray; padding: 10px; margin: 10px;">
           <h3>{{$investment['title']}} by {{$investment->user->name}}</h3>
           {{$investment['body']}}
-          <p><a href="/edit-post/{{$investment->id}}">Edit</a></p>
-          <form action="/delete-post/{{$investment->id}}" method="POST">
+          <p><a href="/edit-investment/{{$investment->id}}">Edit</a></p>
+          <form action="/delete-investment/{{$investment->id}}" method="POST">
             @csrf
             @method('DELETE')
             <button>Delete</button>
