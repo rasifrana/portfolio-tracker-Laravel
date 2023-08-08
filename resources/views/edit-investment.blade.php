@@ -12,6 +12,17 @@
     @method('PUT')
     <input type="text" name="title" value="{{$investment->title}}">
     <textarea name="body">{{$investment->body}}</textarea>
+    <select name="asset-type" id="asset-type">
+        <option value="">Asset Type</option>
+        @foreach($categories as $category)
+        @if($category->category_name == $investment->asset_type)         
+            <option selected value="{{$category->category_name}}">{{ $category->category_name }}</option>
+        @else
+            <option value="{{$category->category_name}}">{{ $category->category_name }}</option>
+        @endif
+            
+        @endforeach
+      </select>
     <button>Save Changes</button>
   </form>
 </body>

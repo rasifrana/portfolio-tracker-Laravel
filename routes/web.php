@@ -1,10 +1,11 @@
 <?php
 
+use App\Models\User;
+use App\Models\Category;
+use App\Models\Investment;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\InvestmentController;
-use App\Models\Investment;
-use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,19 +19,16 @@ use App\Models\User;
 */
 
 Route::get('/', function () {
+    $categories = Category::all();
+    // echo "<pre>".print_r($categories,true)."</pre>"; die();
     $investments = [];
-    // echo "<pre>".print_r(auth()->user(),true)."</pre>"; die();
     // $investments = auth()->user()->usersInvestments()->latest()->get();
     
     if (auth()->check()) {
         // $investments = [auth()->user()->usersInvestments()->latest()->get()];
-        $investments = Investment::where('user_id', auth()->id())->get();
-        // foreach($investments as $invest) {
-        //     echo "<pre>".print_r($invest['title'],true)."</pre>"; die();
-        // }
-        
+        $investments = Investment::where('user_id', auth()->id())->get(); 
     }
-    return view('home', ['investments' => $investments]);
+    return view('home', ['investments' => $investments, 'categories' => $categories]);
 });
 
 Route::post('register', [UserController::class, 'register']);

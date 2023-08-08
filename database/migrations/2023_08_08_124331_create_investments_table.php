@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('title');
             $table->longText('body');
+            $table->string('asset_type');
             $table->foreignId('user_id')->constrained();
         });
     }

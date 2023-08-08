@@ -21,8 +21,14 @@
         <h2>Create a New Asset</h2>
         <form action="/create-investment" method="POST">
           @csrf
-          <input type="text" name="title" placeholder="post title">
-          <textarea name="body" placeholder="body content..."></textarea>
+          <input type="text" name="title" placeholder="Asset Name">
+          <textarea name="body" placeholder="Details"></textarea>
+          <select name="asset-type" id="asset-type">
+            <option value="">Asset Type</option>
+            @foreach($categories as $category)
+                <option value="{{$category->category_name}}">{{ $category->category_name }}</option>
+            @endforeach
+          </select>
           <button>Add Asset</button>
         </form>
       </div>
@@ -34,6 +40,7 @@
         <div style="background-color: gray; padding: 10px; margin: 10px;">
           <h3>{{$investment['title']}} by {{$investment->user->name}}</h3>
           {{$investment['body']}}
+          <p>Category - {{$investment->asset_type}}</p>
           <p><a href="/edit-investment/{{$investment->id}}">Edit</a></p>
           <form action="/delete-investment/{{$investment->id}}" method="POST">
             @csrf
