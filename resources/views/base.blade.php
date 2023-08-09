@@ -65,10 +65,22 @@
               >Pricing</a
             >
             <a class="nav-item bg-white nav-link ml-2" href="#footer"
-              >Contact</a
-            >
+              >Contact</a>
           </div>
+          <span class="ml-auto">
+            @auth
+            <form action="/logout" method="POST">
+                @csrf
+                <button class="btn btn-secondary" >Logout</button>
+            </form>
+            @else
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+                Login
+              </button>
+            @endauth
+        </span>
         </div>
+        
       </div>
     </nav>
 
