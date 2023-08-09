@@ -17,8 +17,12 @@ use App\Http\Controllers\InvestmentController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::get('/', function () {
+
+    return view('welcome');
+});
+
+Route::get('/home', function () {
     $categories = Category::all();
     // echo "<pre>".print_r($categories,true)."</pre>"; die();
     $investments = [];
