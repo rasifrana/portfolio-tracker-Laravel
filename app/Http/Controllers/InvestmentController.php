@@ -20,7 +20,7 @@ class InvestmentController extends Controller
         $incomingFields['asset_type'] = strip_tags($incomingFields['asset-type']);
         $incomingFields['user_id'] = auth()->id();
         Investment::create($incomingFields);
-        return redirect('/');
+        return redirect('/home');
     }
 
     public function showEditScreen(Investment $investment) {
