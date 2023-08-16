@@ -107,30 +107,28 @@
     </div>
       
     @else
-    <div style="border: 1px solid grey; padding: 10px;">
-        <h2>Register</h2>
-        <form action="/register" method="POST">
-          @csrf
-          <input name="name" type="text" placeholder="name">
-          <input name="email" type="text" placeholder="email">
-          <input name="password" type="password" placeholder="password">
-          <button>Register</button>
-        </form>
-    </div>
-
-    
-      
       {{-- login --}}
 
-      <div style="border: 3px solid black;">
-        <h2>Login</h2>
-        <form action="/login" method="POST">
-          @csrf
-          <input name="loginemail" type="text" placeholder="Email">
-          <input name="loginpassword" type="password" placeholder="password">
-          <button>Log in</button>
-        </form>
-      </div>
+      <div class="container">
+        {{-- <p class="text-danger my-5 w-50 mx-auto ">Email or Password Incorrect</p> --}}
+        <div class="w-50 mx-auto  p-3 rounded shadow shadow-lg">
+            <h3 class="text-center mb-5">Login</h3>
+            <form action="/login" method="POST">
+                @csrf
+              
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input type="email" name="loginemail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input type="password" name="loginpassword"  class="form-control" id="exampleInputPassword1" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+              </form>
+        </div>
+    </div>
     @endauth
 
     @endsection

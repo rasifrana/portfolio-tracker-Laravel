@@ -48,7 +48,7 @@ class InvestmentController extends Controller
         $incomingFields['asset_type'] = strip_tags($incomingFields['asset-type']);
 
         $investment->update($incomingFields);
-        return redirect('/');
+        return redirect('/home');
     }
 
     public function deleteInvestment(Investment $investment){
