@@ -57,6 +57,12 @@
                                       <textarea name="body" placeholder="Details"  class="form-control"></textarea> 
                                     </div>
                                     <div class="form-group">
+                                        <input type="number" name="price" placeholder="Price" class="form-control" ">
+                                      </div>
+                                      <div class="form-group">
+                                        <input type="number" name="quantity" placeholder="Quantity" class="form-control">
+                                      </div>
+                                    <div class="form-group">
                                         <select name="asset-type" id="asset-type" class="form-control">
                                             <option value="">Asset Type</option>
                                             @foreach($categories as $category)
@@ -73,30 +79,36 @@
                   </div>
         </div>
         
-        <div class="row ">
+        <div class="row">
             @foreach($investments as $investment)
             <div class="col-s-12 col-md-6 p-2">
             @if($investment->asset_type == 'Stock')
-             <div class="bg-primary  text-white p-3 d-flex flex-column align-items-center justify-content-center shadow shadow-lg rounded">
+             <div class="border-7 border-left border-primary p-3 d-flex flex-column align-items-center justify-content-center shadow shadow-lg rounded">
             @elseif($investment->asset_type == 'Crypto')
-            <div class="bg-info  text-white p-3 d-flex flex-column align-items-center justify-content-center shadow shadow-lg rounded">
+            <div class="border-7 border-left border-info p-3 d-flex flex-column align-items-center justify-content-center shadow shadow-lg rounded">
+             @elseif($investment->asset_type == 'Real Estate')
+                <div class="border-7 border-left border-success p-3 d-flex flex-column align-items-center justify-content-center shadow shadow-lg rounded">
+            @elseif($investment->asset_type == 'Bonds')
+                <div class="border-7 border-left border-warning p-3 d-flex flex-column align-items-center justify-content-center shadow shadow-lg rounded">
             @else
-            <div class="bg-success text-white p-3 d-flex flex-column align-items-center justify-content-center shadow shadow-lg rounded">
-           
+                <div class="border-7 border-left border-dark p-3 d-flex flex-column align-items-center justify-content-center shadow shadow-lg rounded">
             @endif
           
-              <h3>{{$investment['title']}} by {{$investment->user->name}}</h3>
-              {{$investment['body']}}
+              <h4>{{$investment['title']}}</h4>
+              {{-- by {{$investment->user->name}} --}}
+              <p>{{$investment['body']}}</p>
+              <p>Price - €{{$investment['price']}}</p>
+              <p>Quantity - {{$investment['quantity']}}</p>
               <p>Category - {{$investment->asset_type}}</p>
-              <div>
+              {{-- <div>
                 <i class="fa fa-money text-secondary fa-4x" aria-hidden="true"></i>
-              </div>
+              </div> --}}
               <div class="d-flex">
                 <a class="btn btn-sm btn-warning mr-2" href="/edit-investment/{{$investment->id}}">Edit</a>
               <form action="/delete-investment/{{$investment->id}}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button class="btn btn-sm btn-danger">Delete</button>
+                <button class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
               </form>
               </div>
               

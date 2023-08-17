@@ -12,12 +12,16 @@ class InvestmentController extends Controller
         $incomingFields = $request->validate([
             'title' => 'required',
             'body' => 'required',
-            'asset-type' => 'required'
+            'asset-type' => 'required',
+            'price' => 'required',
+            'quantity' => 'required'
         ]);
 
         $incomingFields['title'] = strip_tags($incomingFields['title']);
         $incomingFields['body'] = strip_tags($incomingFields['body']);
         $incomingFields['asset_type'] = strip_tags($incomingFields['asset-type']);
+        $incomingFields['price'] = strip_tags($incomingFields['price']);
+        $incomingFields['quantity'] = strip_tags($incomingFields['quantity']);
         $incomingFields['user_id'] = auth()->id();
         Investment::create($incomingFields);
         return redirect('/home');

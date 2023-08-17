@@ -370,6 +370,10 @@
   .social-icons a.dribbble:hover {
     background-color: #ea4c89;
   }
+
+  .border-7 {
+    border-width:7px !important;
+}
   
   
   @media (max-width: 767px) {
