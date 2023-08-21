@@ -55,15 +55,6 @@
             <a class="nav-item nav-link" href=""
               >Portfolio <span class="sr-only">(current)</span></a
             >
-            <a
-              class="nav-item nav-link bg-white"
-              href=""
-              >Investments</a
-            >
-            <a class="nav-item nav-link bg-white" href="#saving">Save</a>
-            <a class="nav-item bg-white nav-link ml-2" href="#pricing"
-              >Pricing</a
-            >
             <a class="nav-item bg-white nav-link ml-2" href="#footer"
               >Contact</a>
           </div>

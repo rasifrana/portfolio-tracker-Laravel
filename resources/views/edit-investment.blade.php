@@ -19,6 +19,15 @@
                         <textarea name="body" class="form-control">{{$investment->body}}</textarea>
                     </div>
                     <div class="form-group">
+                        <label for="exampleInputEmail1">Price</label>
+                        <input type="number" step=".01" name="price" placeholder="Price" class="form-control" value="{{$investment->price}}">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Quantity</label>
+                        <input type="number" name="quantity" placeholder="Quantity" class="form-control" value="{{$investment->quantity}}">
+                      </div>
+                    
+                    <div class="form-group">
                         <select name="asset-type" class="form-control" id="asset-type">
                             <option value="">Asset Type</option>
                             @foreach($categories as $category)

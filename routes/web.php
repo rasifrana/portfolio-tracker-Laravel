@@ -26,13 +26,37 @@ Route::get('/home', function () {
     $categories = Category::all();
     // echo "<pre>".print_r($categories,true)."</pre>"; die();
     $investments = [];
+    $assets = [];
+    $assetsVal = 0;
+    $color = '';
     // $investments = auth()->user()->usersInvestments()->latest()->get();
     
     if (auth()->check()) {
         // $investments = [auth()->user()->usersInvestments()->latest()->get()];
         $investments = Investment::where('user_id', auth()->id())->get(); 
+        foreach ($investments as $investment) {
+            $assetVal = $investment->price * $investment->quantity;
+            $assetsVal+=$assetVal;
+            $investment->assetVal = $assetVal;
+            if($investment->asset_type == 'Stock'){
+                $color = 'primary';
+            } elseif($investment->asset_type == 'Crypto'){
+                $color = 'info';
+            } elseif($investment->asset_type  == 'Real Estate'){
+                $color = 'success';
+            }elseif($investment->asset_type == 'Bonds') {
+                $color = 'warning';
+            } else {
+                $color = 'dark';
+            }
+            $investment->color = $color;
+          }
+          $assets['investments'] = $investments;
+          $assets['assetsVal'] = $assetsVal;
+
+        //  echo "<pre>".print_r($assets,true)."</pre>"; die();
     }
-    return view('home', ['investments' => $investments, 'categories' => $categories]);
+    return view('home', ['assets' => $assets, 'categories' => $categories]);
 });
 
 Route::post('register', [UserController::class, 'register']);

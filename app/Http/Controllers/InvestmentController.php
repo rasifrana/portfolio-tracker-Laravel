@@ -44,7 +44,9 @@ class InvestmentController extends Controller
         $incomingFields = $request->validate([
             'title' => 'required',
             'body' => 'required',
-            'asset-type' => 'required'
+            'asset-type' => 'required', 
+            'price' => 'required',
+            'quantity' => 'required'
         ]);
 
         $incomingFields['title'] = strip_tags($incomingFields['title']);
@@ -59,6 +61,6 @@ class InvestmentController extends Controller
         if (auth()->user()->id === $investment['user_id']) {
             $investment->delete();
         }
-        return redirect('/');
+        return redirect('/home');
     }
 }

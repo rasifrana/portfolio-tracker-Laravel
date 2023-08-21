@@ -32,7 +32,11 @@
       {{-- Show all Investments --}}
     <div class="container py-5">
         
-            <h2 class="text-center">Welcome {{ Auth::user()->name }} !</h2>
+            <div class="d-flex align-items-center justify-content-between my-4">
+                <h3 class="text-center">Welcome {{ Auth::user()->name }} !</h3>
+                <h4>Your Portfolio: €{{$assets['assetsVal']}}</h4>
+            </div>
+            
             <div class="text-center py-3 mb-3">
                 <button type="button" class="btn btn-success ml-2" data-toggle="modal" data-target="#assetModal">
                     +Add Asset
@@ -57,7 +61,7 @@
                                       <textarea name="body" placeholder="Details"  class="form-control"></textarea> 
                                     </div>
                                     <div class="form-group">
-                                        <input type="number" name="price" placeholder="Price" class="form-control" ">
+                                        <input type="number" step=".01" name="price" placeholder="Price" class="form-control">
                                       </div>
                                       <div class="form-group">
                                         <input type="number" name="quantity" placeholder="Quantity" class="form-control">
@@ -80,26 +84,31 @@
         </div>
         
         <div class="row">
-            @foreach($investments as $investment)
+            @foreach($assets['investments'] as $investment)
             <div class="col-s-12 col-md-6 p-2">
-            @if($investment->asset_type == 'Stock')
-             <div class="border-7 border-left border-primary p-3 d-flex flex-column align-items-center justify-content-center shadow shadow-lg rounded">
-            @elseif($investment->asset_type == 'Crypto')
-            <div class="border-7 border-left border-info p-3 d-flex flex-column align-items-center justify-content-center shadow shadow-lg rounded">
-             @elseif($investment->asset_type == 'Real Estate')
-                <div class="border-7 border-left border-success p-3 d-flex flex-column align-items-center justify-content-center shadow shadow-lg rounded">
-            @elseif($investment->asset_type == 'Bonds')
-                <div class="border-7 border-left border-warning p-3 d-flex flex-column align-items-center justify-content-center shadow shadow-lg rounded">
-            @else
-                <div class="border-7 border-left border-dark p-3 d-flex flex-column align-items-center justify-content-center shadow shadow-lg rounded">
-            @endif
+           
+                <div class="border-7 border-left border-{{$investment->color}} p-3 d-flex flex-column align-items-center justify-content-center shadow shadow-lg rounded">
           
-              <h4>{{$investment['title']}}</h4>
+            <div class="d-flex align-items-center justify-content-start w-100">
+                <h4>{{$investment['title']}}</h4>
+                <small class="rounded px-1 bg-{{$investment->color}} ml-2 mb-2 text-white text-sm">{{$investment->asset_type}}</small>
+            </div>
+              
               {{-- by {{$investment->user->name}} --}}
-              <p>{{$investment['body']}}</p>
-              <p>Price - €{{$investment['price']}}</p>
-              <p>Quantity - {{$investment['quantity']}}</p>
-              <p>Category - {{$investment->asset_type}}</p>
+              <div class="text-left w-100">
+                <small  class="">{{$investment['body']}}</small>
+              <div class="d-flex align-items-center">
+                <p>Price - €{{$investment['price']}}</p>
+                <p class="ml-2">Qty - {{$investment['quantity']}}</p>
+              </div>
+              <div class="d-flex align-items-center mb-4">
+                <p>Total: €</p>
+                 <h4 class="mb-2">{{$investment->assetVal}}</h4>
+              </div>
+              </div>
+              
+              
+              
               {{-- <div>
                 <i class="fa fa-money text-secondary fa-4x" aria-hidden="true"></i>
               </div> --}}
